@@ -56,6 +56,12 @@ async function bootstrap() {
   const configService = app.get(ConfigService<EnvironmentVariables>);
   const PORT = configService.get('PORT', { infer: true });
 
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+    }),
+  );
+
   await app.listen(PORT, '0.0.0.0');
   logger.log(`Listening on port ${PORT}`);
 }

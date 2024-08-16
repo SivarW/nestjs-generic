@@ -10,7 +10,7 @@ interface Ingedient {
   name: string;
   amount: number;
   unitType: UnitType;
-  alreadyInHouse?: boolean;
+  excludedFromPrice?: boolean;
 }
 
 export interface Recipe {

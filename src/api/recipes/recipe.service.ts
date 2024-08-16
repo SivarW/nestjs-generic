@@ -28,14 +28,14 @@ export class RecipeService {
             name: 'olijfolie',
             amount: 2,
             unitType: UnitType.TableSpoon,
-            alreadyInHouse: true,
+            excludedFromPrice: true,
           },
           {
             id: 4,
             name: 'pesto',
             amount: 2,
             unitType: UnitType.TableSpoon,
-            alreadyInHouse: true,
+            excludedFromPrice: true,
           },
           {
             id: 5,
@@ -66,7 +66,7 @@ export class RecipeService {
             name: 'zwarte peper',
             amount: 1,
             unitType: UnitType.APinch,
-            alreadyInHouse: true,
+            excludedFromPrice: true,
           },
         ],
         instructions: [
@@ -78,5 +78,10 @@ export class RecipeService {
         ],
       },
     ];
+  }
+
+  public async findRecipeById(id: number): Promise<Recipe | null> {
+    const recipes = await this.findRecipes();
+    return recipes.find((recipe) => recipe.id === id) ?? null;
   }
 }
