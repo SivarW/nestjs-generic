@@ -8,9 +8,7 @@ import {
 } from '@nestjs/platform-fastify';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { EnvironmentVariables } from '@utils/config/config';
-
 import { sApiKeyBearer, sJwtBearer } from '@utils/header';
-import { TrpcRouter } from "./trpc/trpc.router";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -51,8 +49,6 @@ async function bootstrap() {
   app.enableVersioning({ type: VersioningType.URI, defaultVersion: '1' });
 
   app.enableCors();
-  const trpc = app.get(TrpcRouter);
-  trpc.applyMiddleware(app);
 
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup(`docs`, app, document);
