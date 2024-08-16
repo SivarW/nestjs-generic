@@ -21,8 +21,8 @@ async function bootstrap() {
 
   // Create a Swagger document options
   const options = new DocumentBuilder()
-    .setTitle('Generic API')
-    .setDescription('A generic API')
+    .setTitle('Updated API')
+    .setDescription('An updated API')
     .setVersion('1.0')
     .addBearerAuth(
       {

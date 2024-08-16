@@ -14,7 +14,7 @@
     "start:prod": "node dist/main",
     "prisma:generate": "prisma generate",
     "prisma:debug": "prisma db push",
-    "prisma:dev": "prisma migrate dev --name",
+    "prisma:dev": "prisma migrate dev",
     "prisma:deploy": "prisma migrate deploy",
     "start:migrate:prod": "npm run prisma:deploy && npm run start:prod",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
