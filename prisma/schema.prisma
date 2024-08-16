@@ -65,3 +65,21 @@ model ApiKey {
   key            String       @unique
   scopes         String[] // The scopes that the api key has access to
 }
+
+model Ingredient {
+  id                Int      @id @default(autoincrement())
+  name              String
+  amount            Int
+  unitType          String
+  excludedFromPrice Boolean? @default(false)
+  recipeId          Int
+  recipe            Recipe   @relation(fields: [recipeId], references: [id])
+}
+
+model Recipe {
+  id           Int          @id @default(autoincrement())
+  title        String
+  imageUrl     String
+  instructions String[]
+  ingredients  Ingredient[] @relation()
+}

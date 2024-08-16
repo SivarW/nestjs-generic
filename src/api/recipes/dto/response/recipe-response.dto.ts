@@ -38,7 +38,7 @@ export class RecipeResponseDto {
     example: 'Wraps met halloumi',
     description: 'Title of the recipe',
   })
-  title: string;
+  name: string;
 
   @ApiProperty({
     example:
