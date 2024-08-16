@@ -7,24 +7,14 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
-import {
-  ApiBearerAuth,
-  ApiBody,
-  ApiExcludeController,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '@utils/auth/guards/jwt-auth.guard';
 import { RefreshTokenGuard } from '@utils/auth/guards/refresh-token.guard';
 import {
   JwtAuthenticatedRequest,
   PasswordAuthenticatedRequest,
 } from '@utils/auth/types';
-import {
-  SHOW_CONTROLLER_IN_SWAGGER,
-  JwtBearer,
-  JwtHeader,
-  sJwtBearer,
-} from '../header';
+import { JwtBearer, JwtHeader, sJwtBearer } from '../header';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import {
@@ -35,8 +25,8 @@ import { UsersService } from '@api/users/users.service';
 import { Cron, CronExpression } from '@nestjs/schedule';
 
 const CONTROLLER_NAME = `auth`;
+
 @ApiTags(CONTROLLER_NAME)
-@ApiExcludeController(SHOW_CONTROLLER_IN_SWAGGER)
 @JwtBearer
 @Controller(CONTROLLER_NAME)
 export class AuthController {

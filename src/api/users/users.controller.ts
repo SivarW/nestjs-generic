@@ -11,19 +11,19 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { ApiExcludeController, ApiTags } from '@nestjs/swagger';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
 
 import { ApiKeyService } from '@utils/api-key/api-key.service';
 import { JwtAuthGuard } from '@utils/auth/guards/jwt-auth.guard';
 import { JwtAuthenticatedRequest } from '@utils/auth/types';
-import { JwtBearer, SHOW_CONTROLLER_IN_SWAGGER } from '@utils/header';
+import { JwtBearer } from '@utils/header';
+import { ApiTags } from '@nestjs/swagger';
 
 const CONTROLLER_NAME = `user`;
+
 @ApiTags(CONTROLLER_NAME)
 @JwtBearer
-@ApiExcludeController(SHOW_CONTROLLER_IN_SWAGGER)
 @UseGuards(JwtAuthGuard)
 @Controller(CONTROLLER_NAME)
 export class UsersController {
