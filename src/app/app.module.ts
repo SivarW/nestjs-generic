@@ -10,11 +10,13 @@ import { AuthModule } from '@utils/auth/auth.module';
 import { configValidationSchema } from '@utils/config/config';
 import { FastifyDomainFilterMiddleware } from '@utils/middleware/domain-filter.middleware';
 import { PrismaService } from '@utils/prisma/prisma.service';
+import { TrpcModule } from "../trpc/trpc.module";
 
 @Module({
   imports: [
     UsersModule,
     AuthModule,
+    TrpcModule,
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,

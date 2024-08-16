@@ -10,6 +10,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { EnvironmentVariables } from '@utils/config/config';
 
 import { sApiKeyBearer, sJwtBearer } from '@utils/header';
+import { TrpcRouter } from "./trpc/trpc.router";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -19,7 +20,6 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   const logger = new Logger('NestBootstrap');
 
-  // Create a Swagger document options
   const options = new DocumentBuilder()
     .setTitle('Updated API')
     .setDescription('An updated API')
@@ -48,19 +48,19 @@ async function bootstrap() {
     )
     .build();
 
-  // Generate the Swagger document
-
   app.enableVersioning({ type: VersioningType.URI, defaultVersion: '1' });
 
-  const document = SwaggerModule.createDocument(app, options);
+  app.enableCors();
+  const trpc = app.get(TrpcRouter);
+  trpc.applyMiddleware(app);
 
-  // Set up Swagger UI
+  const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup(`docs`, app, document);
 
   const configService = app.get(ConfigService<EnvironmentVariables>);
   const PORT = configService.get('PORT', { infer: true });
 
-  await app.listen(PORT, '0.0.0.0'); // MUST specify 0.0.0.0 using fastify
+  await app.listen(PORT, '0.0.0.0');
   logger.log(`Listening on port ${PORT}`);
 }
 bootstrap();
