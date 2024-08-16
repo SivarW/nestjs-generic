@@ -15,7 +15,7 @@ interface Ingedient {
 
 export interface Recipe {
   id: number;
-  title: string;
+  name: string;
   imageUrl: string;
   ingredients: Ingedient[];
   instructions: string[];

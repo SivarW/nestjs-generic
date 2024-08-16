@@ -17,11 +17,14 @@ export class RecipeController {
   @Get('/recipes')
   @ApiOkResponse({ type: RecipesResponseDto })
   public async getRecipes(): Promise<RecipesResponseDto> {
-    const prices = await this.priceService.findPricesByRecipeId(1);
+    const id = 1;
+
+    const recipe = await this.recipeService.findRecipeById(id);
+    const prices = await this.priceService.findPricesByRecipeId(recipe);
     return {
       items: [
         {
-          id: 1,
+          id,
           name: 'Wraps met halloumi',
           imageUrl:
             'https://www.lekkerensimpel.com/wp-content/uploads/2022/08/588A2138.jpg.webp',
@@ -40,7 +43,7 @@ export class RecipeController {
     if (!recipe) {
       throw new NotFoundException(`Recipe with id ${id} does not exist`);
     }
-    const prices = await this.priceService.findPricesByRecipeId(1);
+    const prices = await this.priceService.findPricesByRecipeId(recipe);
     return {
       ...recipe,
       prices,
